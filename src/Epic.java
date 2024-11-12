@@ -22,7 +22,7 @@ public class Epic extends Task {
     }
 
     public void removeSubtaskId(int index) {
-        subtaskId.remove(index);
+        subtaskId.remove(Integer.valueOf(index));
     }
 
     public void deleteAllSubtaskId() {
