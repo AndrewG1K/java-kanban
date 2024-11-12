@@ -91,32 +91,41 @@ public class TaskManager {
     }
 
     public void deleteAllEpicsAndSubTasks() {
-        deleteAllSubTasks();
+        subTasks.clear();
+        epics.clear();
+    }
+
+    private void deleteAllSubTasks() {
+        subTasks.clear();
         for (Epic epic : epics.values()){
             epic.deleteAllSubtaskId();
             updateEpicStatus(epic.getId());
         }
     }
 
-    private void deleteAllSubTasks() {
-        subTasks.clear();
-    }
-
     //Получение задачи по идентификатору
 
     public Task getTaskById(int index) {
-        Task task = tasks.get(index);
-        return task;
+        return tasks.get(index);
     }
 
     public Epic getEpicById(int index) {
-        Epic epic = epics.get(index);
-        return epic;
+        return epics.get(index);
     }
 
-    public SubTask getSubtaskByEpicId(int epicId) {
-        SubTask subTask = subTasks.get(epicId);
-        return subTask;
+    public SubTask getSubtaskById(int index) {
+        return subTasks.get(index);
+    }
+
+    public ArrayList<SubTask> getSubtaskByEpicId(int epicId){
+        Epic epic = epics.get(epicId);
+        ArrayList<SubTask> subTasksList = new ArrayList<>();
+        if(epic != null) {
+            for (int subTaskId : epic.getSubTaskId()) {
+                subTasksList.add(subTasks.get(subTaskId));
+            }
+        }
+        return subTasksList;
     }
 
     //Удаление задачи по идентификатору
@@ -153,6 +162,13 @@ public class TaskManager {
     public void updateTask(Task task) {
         if (tasks.containsKey(task.getId())) {
             tasks.put(task.getId(), task);
+        }
+    }
+
+    public void updateEpic(Epic epic) {
+        if(epics.containsKey(epic.getId())){
+            epics.put(epic.getId(), epic);
+            updateEpicStatus(epic.getId());
         }
     }
 
