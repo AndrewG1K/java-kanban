@@ -1,11 +1,14 @@
+import manager.InMemoryTaskManager;
+import manager.Managers;
+import manager.TaskManager;
 import org.junit.jupiter.api.Test;
-
+import task.*;
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryHistoryManagerTest {
-    InMemoryTaskManager manager = new InMemoryTaskManager();
+    TaskManager manager = Managers.getDefault();
+    InMemoryTaskManager taskManager = new InMemoryTaskManager();
     private final Task task1 = new Task(1, "taskName1", "taskDescr1", Status.NEW);
     private final Task task2 = new Task(2, "taskName2", "taskDescr2", Status.IN_PROGRESS);
 
@@ -22,7 +25,7 @@ class InMemoryHistoryManagerTest {
         manager.getTaskById(task2.getId());
         manager.getEpicById(epic1.getId());
         manager.getEpicById(epic2.getId());
-        assertEquals(4, manager.historyManager.getHistory().size());
+        assertEquals(4, manager.getHistory().size());
     }
 
     @Test
@@ -40,7 +43,7 @@ class InMemoryHistoryManagerTest {
         manager.getTaskById(task2.getId());
         manager.getEpicById(epic1.getId());
         manager.getEpicById(epic2.getId());
-        assertEquals(list, manager.historyManager.getHistory());
+        assertEquals(list, manager.getHistory());
 
     }
 }

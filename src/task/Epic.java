@@ -1,6 +1,6 @@
+package task;
+
 import java.util.ArrayList;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
 
 public class Epic extends Task {
     private final ArrayList<Integer> subtaskId = new ArrayList<>();

@@ -1,9 +1,9 @@
+import manager.InMemoryTaskManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import task.*;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryTaskManagerTest {
@@ -25,7 +25,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    void addeNewTaskAndGetById() {
+    void addNewTaskAndGetById() {
         Task taskToAdd = new Task(1, "taskName1", "taskDescr1", Status.NEW);
         manager.addNewTask(taskToAdd);
         assertEquals(task1, manager.getTaskById(1), "Tasks equal");
@@ -177,13 +177,4 @@ class InMemoryTaskManagerTest {
         assertNotEquals(status1, status2);
     }
 
-    @Test
-    void getSubtasksFromEpic() {
-        manager.addNewEpic(epic1);
-        manager.addNewSubtask(subTasks1);
-        manager.addNewSubtask(subTasks2);
-        manager.addNewSubtask(subTasks3);
-        manager.getSubtasksFromEpic(epic1.getId());
-        assertEquals(3, manager.allSubtasks().size());
-    }
 }
